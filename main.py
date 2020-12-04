@@ -1,9 +1,16 @@
+"""
+author     = "Baptiste Varamo & Jean-François Giammari"
+credits    = ["Baptiste Varamo","Jean-François Giammari"]
+version    = "1.0"
+"""
+
+
 MEM = []
 PCODE = []
 PC = 0
 def charge(file):
     """
-    Charge le fichier contenant les instructions MEM
+    Charge le fichier contenant les instructions dans le PCODE
     """
     with open('INST.txt') as f:
         for line in f:
@@ -22,6 +29,7 @@ def interprete():
     global MEM
     global PC
     global PCODE
+    print(PCODE)
     while PC < len(PCODE):
         inst = PCODE[PC]
         try:
@@ -31,6 +39,7 @@ def interprete():
         except NameError:
             print("ERREUR : "+str(inst[0])+" n'existe pas (Ligne : "+str(PC)+")")
             PC = 0
+        print("PC : "+str(PC)+" - PCODE : "+str(PCODE[PC])+" - MEM : "+ str(MEM))
         PC+=1
 
 def ADD():
@@ -116,6 +125,7 @@ def LEQ():
 def PRN():
     """ Imprime le sommet et dépile """
     print(MEM[-1])
+    MEM.pop(-1)
 
 def INN(): 
     """Lit un entier, le stocke à l'adresse trouvée au sommet de
